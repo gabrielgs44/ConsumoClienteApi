@@ -2,6 +2,7 @@
 using ConsumeClienteApi.Dominio;
 using ConsumeClienteApi.Ioc;
 using ConsumeClienteApi.Services;
+using ConsumeClienteApi.ServicoExterno.AtualizarClientes;
 using ConsumeClienteApi.ServicoExterno.CadastrarClientes;
 using ConsumeClienteApi.ServicoExterno.DeletarClientes;
 using ConsumeClienteApi.ServicoExterno.ObterClientes;
@@ -18,7 +19,8 @@ namespace ConsumeClienteApi
             var clienteHttp = new ClienteHttp();
             IClienteServices clienteServices = new ClienteServices(new ObterClienteServicoExterno(clienteHttp),
                                                                    new CadastrarClienteServicoExterno(clienteHttp),
-                                                                   new DeletarClienteServicoExterno(clienteHttp));
+                                                                   new DeletarClienteServicoExterno(clienteHttp),
+                                                                   new AtualizarClienteServicoExterno(clienteHttp));
 
             var continuar = true;
             do
@@ -26,6 +28,7 @@ namespace ConsumeClienteApi
                 Console.WriteLine("1 - Cadastrar cliente");
                 Console.WriteLine("2 - Obter cliente");
                 Console.WriteLine("3 - Deletar Cliente");
+                Console.WriteLine("4 - Atualizar Cliente");
                 Console.Write("Selecione o serviço: ");
 
                 try
@@ -42,6 +45,9 @@ namespace ConsumeClienteApi
                             break;
                         case 3:
                             OpcaoCliente.DeletarCliente(clienteServices);
+                            break;
+                        case 4:
+                            OpcaoCliente.AtualizarCliente(clienteServices);
                             break;
                         default:
                             Console.WriteLine("Opcão inválida!");

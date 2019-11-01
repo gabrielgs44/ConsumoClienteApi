@@ -1,4 +1,5 @@
-﻿using ConsumeClienteApi.Dominio;
+﻿using ConsumeClienteApi.Comum.Dto;
+using ConsumeClienteApi.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,6 @@ namespace ConsumeClienteApi.Services
         public IEnumerable<Cliente> ObterClientes(int? id = null);
         public Cliente CadastrarCliente(int id, string nome, string login, string senha);
         public string DeletarCliente(int? id);
+        public string AtualizarCliente(int id, string nome, string login, string senha);
     }
 }
