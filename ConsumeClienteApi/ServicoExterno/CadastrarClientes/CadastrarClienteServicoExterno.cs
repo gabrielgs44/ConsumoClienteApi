@@ -11,7 +11,7 @@ namespace ConsumeClienteApi.ServicoExterno.CadastrarClientes
 {
     public class CadastrarClienteServicoExterno : ICadastrarClienteServicoExterno
     {
-        private const string RequestUri = "https://localhost:44300/api/clientes/CadastaCliente";
+        private const string RequestUri = "https://localhost:44300/api/clientes/CadastrarCliente";
         private const string UriString = "https://localhost:44300/api/clientes";
         private readonly HttpClient _httpClient;
 
