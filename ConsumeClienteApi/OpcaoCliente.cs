@@ -10,6 +10,7 @@ namespace ConsumeClienteApi
     {
         public static void CadastrarCliente(IClienteServices clienteService)
         {
+            Console.Clear();
             Console.Write("Digite o id: ");
             int id = int.Parse(Console.ReadLine());
             Console.Write("Digite o nome: ");
@@ -25,6 +26,7 @@ namespace ConsumeClienteApi
 
         public static void ObterCliente(IClienteServices clienteService)
         {
+            Console.Clear();
             Console.Write("Informe o id, caso queria um cliente específico: ");
             var idString = Console.ReadLine();
             int? id;
@@ -43,6 +45,25 @@ namespace ConsumeClienteApi
             {
                 Console.WriteLine(x);
             }
+        }
+
+        public static void DeletarCliente(IClienteServices clienteService)
+        {
+            Console.Clear();
+            Console.Write("Digite o id do cliente que deseja deletar: ");
+            var idString = Console.ReadLine();
+            int? id;
+
+            if (idString == string.Empty)
+            {
+                id = null;
+            }
+            else
+            {
+                id = int.Parse(idString);
+            }
+
+            Console.WriteLine(clienteService.DeletarCliente(id));
         }
     }
 }

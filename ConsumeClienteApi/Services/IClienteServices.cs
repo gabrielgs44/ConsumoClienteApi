@@ -9,5 +9,6 @@ namespace ConsumeClienteApi.Services
     {
         public IEnumerable<Cliente> ObterClientes(int? id = null);
         public Cliente CadastrarCliente(int id, string nome, string login, string senha);
+        public string DeletarCliente(int? id);
     }
 }

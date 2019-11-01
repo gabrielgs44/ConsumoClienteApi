@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsumeClienteApi.Comum
+namespace ConsumeClienteApi.Comum.Exceptions
 {
     public class NaoEncontradoException : Exception
     {
-        public NaoEncontradoException(string mensagem): base(mensagem)
+        public NaoEncontradoException(string mensagem) : base(mensagem)
         {
         }
     }

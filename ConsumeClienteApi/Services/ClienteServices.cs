@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using ConsumeClienteApi.Comum;
 using ConsumeClienteApi.ServicoExterno.CadastrarClientes;
+using ConsumeClienteApi.Comum.Exceptions;
+using ConsumeClienteApi.ServicoExterno.DeletarClientes;
 
 namespace ConsumeClienteApi.Services
 {
@@ -13,11 +14,13 @@ namespace ConsumeClienteApi.Services
     {
         private readonly IObterClienteServicoExterno _obterCliente;
         private readonly ICadastrarClienteServicoExterno _cadastrarCliente;
+        private readonly IDeletarClienteServicoExterno _deletarCliente;
 
-        public ClienteServices(IObterClienteServicoExterno obterCliente, ICadastrarClienteServicoExterno cadastrarCliente)
+        public ClienteServices(IObterClienteServicoExterno obterCliente, ICadastrarClienteServicoExterno cadastrarCliente, IDeletarClienteServicoExterno deletarCliente)
         {
             _obterCliente = obterCliente;
             _cadastrarCliente = cadastrarCliente;
+            _deletarCliente = deletarCliente;
         }
 
         public IEnumerable<Cliente> ObterClientes(int? id = null)
@@ -37,6 +40,11 @@ namespace ConsumeClienteApi.Services
             var cliente = Cliente.Criar(id, nome, login, senha);
 
             return _cadastrarCliente.Executar(cliente);
+        }
+
+        public string DeletarCliente(int? id)
+        {
+            return _deletarCliente.Executar(id);
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using ConsumeClienteApi.Dominio;
+﻿using ConsumeClienteApi.Comum;
+using ConsumeClienteApi.Dominio;
 using ConsumeClienteApi.Ioc;
 using ConsumeClienteApi.Services;
 using ConsumeClienteApi.ServicoExterno.CadastrarClientes;
+using ConsumeClienteApi.ServicoExterno.DeletarClientes;
 using ConsumeClienteApi.ServicoExterno.ObterClientes;
 using System;
 using System.Collections.Generic;
@@ -13,15 +15,17 @@ namespace ConsumeClienteApi
         static void Main(string[] args)
         {
             InjecaoDeDependencia.Executar();
-
-            IClienteServices clienteServices = new ClienteServices(new ObterClienteServicoExterno(new System.Net.Http.HttpClient()),
-                                                                   new CadastrarClienteServicoExterno(new System.Net.Http.HttpClient()));
+            var clienteHttp = new ClienteHttp();
+            IClienteServices clienteServices = new ClienteServices(new ObterClienteServicoExterno(clienteHttp),
+                                                                   new CadastrarClienteServicoExterno(clienteHttp),
+                                                                   new DeletarClienteServicoExterno(clienteHttp));
 
             var continuar = true;
             do
             {
                 Console.WriteLine("1 - Cadastrar cliente");
                 Console.WriteLine("2 - Obter cliente");
+                Console.WriteLine("3 - Deletar Cliente");
                 Console.Write("Selecione o serviço: ");
 
                 try
@@ -35,6 +39,9 @@ namespace ConsumeClienteApi
                             break;
                         case 2:
                             OpcaoCliente.ObterCliente(clienteServices);
+                            break;
+                        case 3:
+                            OpcaoCliente.DeletarCliente(clienteServices);
                             break;
                         default:
                             Console.WriteLine("Opcão inválida!");

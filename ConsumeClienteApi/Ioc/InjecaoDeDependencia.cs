@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ConsumeClienteApi.Comum;
 using ConsumeClienteApi.Comum.Dto;
 using ConsumeClienteApi.Services;
 using ConsumeClienteApi.ServicoExterno.ObterClientes;
@@ -14,13 +15,13 @@ namespace ConsumeClienteApi.Ioc
             var serviceProvider = new ServiceCollection()
                 .AddSingleton<IObterClienteServicoExterno, ObterClienteServicoExterno>()
                 .AddSingleton<IClienteServices, ClienteServices>()
+                .AddSingleton<IClienteHttp, ClienteHttp>()
                 .AddSingleton(new MapperConfiguration(cfg =>
                 {
                     cfg.AddProfile(new ClientePerfil());
                     cfg.AddProfile(new ClienteDtoPerfil());
 
                 }).CreateMapper())
-                .AddScoped<HttpClient>()
                 .BuildServiceProvider();
         }
 
